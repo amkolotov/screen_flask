@@ -1,3 +1,7 @@
+docker-compose.yml
+Dockerfile
+
+
 .idea/
 media/*
 !media/.gitkeep
