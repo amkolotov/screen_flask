@@ -1,5 +1,6 @@
 .idea/
 media/*
+!media/.gitkeep
 *.db
 
 # Byte-compiled / optimized / DLL files
