@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+List
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row mt-2">
+
+    <div class="col">
+
+
+        {% for task in page_obj.items %}
+
+        <div class="article row align-items-center py-2">
+
+            <div class="col-6 col-md-7 task_url">
+                <span>{{ task.url }}</span>
+            </div>
+
+            <div class="col-6 col-md-5">
+                <div class="row align-items-center justify-content-end">
+
+                    <span class="mr-4">{{ task.created_at.strftime('%d.%m.%Y') }}</span>
+
+                    <a href="{{ url_for('view_screen', task_id=task.id) }}" target="_blank">
+                        <button class="btn btn-secondary">Смотреть</button>
+                    </a>
+                    <a href="{{ url_for('load_screen', task_id=task.id) }}">
+                        <button class="btn btn-secondary ml-1">Скачать</button>
+                    </a>
+                    <a href="{{ task.url }}" target="_blank">
+                        <button class="btn btn-secondary ml-1">Перейти</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <div class="row justify-content-center my-4">
+            {% include 'includes/inc_pagination.html' %}
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

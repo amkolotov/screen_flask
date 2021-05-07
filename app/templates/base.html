@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    {% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all">
+    {% endblock %}
+
+
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+{% block navbar %}
+<div class="container-fluid fixed-top p-0">
+
+    <div class="container-fluid menu">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col m-auto p-0 d-flex justify-content-between">
+                    <div class="col label m-auto p-0">
+                        <span>SCREENSHOT</span>
+                    </div>
+                    <div class="col mx-0">
+                        <a class="p-0" href="{{ url_for('index') }}"><span>Сделать скриншот</span></a>
+                    </div>
+                    <div class="col mx-0">
+                        <a class="p-0" href="{{ url_for('task_list') }}"><span>Все скриншоты</span></a>
+                    </div>
+                    <div class="col search p-0">
+
+                        <form action="{{ url_for('search') }}" class="form-inline">
+                            <img src="{{ url_for('static', filename='images/search.png') }}" alt="search">
+                            <input type="text" name="search">
+                        </form>
+                    </div>
+
+                </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+<div class="content">
+    <div class="container">
+    {% block content %}
+    {% endblock %}
+    </div>
+</div>
+
+{% block footer %}
+<footer class="footer">
+    <div class="basement">
+        <div class="container">
+            <div class="years d-flex justify-content-between">
+                <p><b>© 2021 ООО “Скриншот”.</b> Копирование запрещено</p>
+                <p>Политика конфиденциальности</p>
+
+            </div>
+        </div>
+    </div>
+
+
+</footer>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% endblock %}
+
+
+</body>
+</html>
