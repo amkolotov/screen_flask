@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+
+  web:
+    container_name: screen_flask
+    restart: always
+    build: .
+    expose:
+      - 5000
+    command: gunicorn run:app --bind 0.0.0.0:5000
+    environment:
+      - DATABASE_URL=postgresql://screen_user:screen_pass@db:5432/screen_db
+      - DB_HOST=screen_postgres
+      - DB_PORT=5432
+      - DATABASE=postgres
+    volumes:
+      - media_volume:/home/app/web/app/static
+      - media_volume:/home/app/web/media
+    depends_on:
+      - db
+
+  db:
+    container_name: screen_postgres
+    restart: always
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=screen_user
+      - POSTGRES_PASSWORD=screen_pass
+      - POSTGRES_DB=screen_db
+      - FLASK_ENV=production
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    volumes:
+      - media_volume:/home/app/web/app/static
+      - media_volume:/home/app/web/media
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

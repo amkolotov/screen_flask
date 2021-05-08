@@ -10,5 +10,5 @@ class Configuration(object):
     PAGINATE_BY = 15
 
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'screen.db')
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", 'sqlite:///' + os.path.join(BASEDIR, 'screen.db'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -15,7 +15,8 @@ def get_driver():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--disable-site-isolation-trials')
-    driver = webdriver.Chrome('../driver/chromedriver', options=chrome_options)
+    # driver = webdriver.Chrome('../driver/chromedriver', options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     return driver
 
 
