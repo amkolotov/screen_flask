@@ -6,8 +6,8 @@ services:
     container_name: screen_flask
     restart: always
     build: .
-    ports:
-      - 5000:5000
+    expose:
+      - 5000
     command: gunicorn run:app --bind 0.0.0.0:5000
     environment:
       - DATABASE_URL=postgresql://screen_user:screen_pass@db:5432/screen_db
@@ -30,6 +30,17 @@ services:
       - POSTGRES_USER=screen_user
       - POSTGRES_PASSWORD=screen_pass
       - POSTGRES_DB=screen_db
+      - FLASK_ENV=production
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    volumes:
+      - static_volume:/home/app/web/app/static
+      - media_volume:/home/app/web/media
+    depends_on:
+      - web
 
 volumes:
   postgres_data:

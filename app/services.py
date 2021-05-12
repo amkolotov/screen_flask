@@ -15,6 +15,7 @@ def get_driver():
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--disable-site-isolation-trials')
+    chrome_options.add_argument('--disable-dev-shm-usage')
     # driver = webdriver.Chrome('../driver/chromedriver', options=chrome_options)
     driver = webdriver.Chrome(options=chrome_options)
     return driver
@@ -30,12 +31,11 @@ def get_screen(url: str):
 
         driver.get(url)
 
-        width = driver.execute_script("return document.body.offsetWidth")
-        height = driver.execute_script('return document.body.scrollHeight')
-
-        driver.set_window_size(width, height)
-        driver.refresh()
-        time.sleep(1)
+        # full page screenshot
+        # width = driver.execute_script("return document.body.offsetWidth")
+        # height = driver.execute_script('return document.body.scrollHeight')
+        # driver.set_window_size(width, height)
+        # driver.refresh()
 
         filename = f'{str(datetime.utcnow())}.png'
 
